@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\RayCastingEngine.csproj": {}
+    "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\SimpleRayTracingEngine.csproj": {}
   },
   "projects": {
-    "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\RayCastingEngine.csproj": {
+    "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\SimpleRayTracingEngine.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\RayCastingEngine.csproj",
-        "projectName": "RayCastingEngine",
-        "projectPath": "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\RayCastingEngine.csproj",
+        "projectUniqueName": "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\SimpleRayTracingEngine.csproj",
+        "projectName": "SimpleRayTracingEngine",
+        "projectPath": "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\SimpleRayTracingEngine.csproj",
         "packagesPath": "C:\\Users\\Enes\\.nuget\\packages\\",
         "outputPath": "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\obj\\",
         "projectStyle": "PackageReference",

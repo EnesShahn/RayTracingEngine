@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RayCastingEngine
+namespace SimpleRayTracingEngine
 {
 	class Hit
 	{
-		private float tCurrent;
+		private float tCurrent = int.MaxValue;
 		private Color32 color;
 		private bool intersection;
 
@@ -20,7 +20,6 @@ namespace RayCastingEngine
 			get { return color; }
 			set { color = value; }
 		}
-
 		public bool Intersection {
 			get { return intersection; }
 			set { intersection = value; }

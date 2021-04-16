@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Enes\\source\\repos\\RayTracingEngine\\RayTracingEngine.csproj": {}
+    "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\RayTracingEngine.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Enes\\source\\repos\\RayTracingEngine\\RayTracingEngine.csproj": {
+    "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\RayTracingEngine.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Enes\\source\\repos\\RayTracingEngine\\RayTracingEngine.csproj",
+        "projectUniqueName": "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\RayTracingEngine.csproj",
         "projectName": "RayTracingEngine",
-        "projectPath": "C:\\Users\\Enes\\source\\repos\\RayTracingEngine\\RayTracingEngine.csproj",
+        "projectPath": "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\RayTracingEngine.csproj",
         "packagesPath": "C:\\Users\\Enes\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Enes\\source\\repos\\RayTracingEngine\\obj\\",
+        "outputPath": "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -40,6 +40,16 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

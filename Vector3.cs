@@ -1,20 +1,50 @@
 ﻿using System;
 
-namespace RayCastingEngine
+namespace SimpleRayTracingEngine
 {
 	public class Vector3
 	{
-		public float X { get; set; }
-		public float Y { get; set; }
-		public float Z { get; set; }
+		private float magnitude;
+		private Vector3 unitVector;
+		private float x, y, z;
 
+		public float X {
+			get { return x; }
+			set { x = value; }
+		}
+		public float Y {
+			get { return y; }
+			set { y = value; }
+		}
+		public float Z {
+			get { return z; }
+			set { z = value; }
+		}
+
+		public float Magnitude {
+			get { CalculateMagnitudeAndUnitVector(); return magnitude; }
+		}
+		public Vector3 Normalized {
+			get { CalculateMagnitudeAndUnitVector(); return unitVector; }
+		}
+
+		public Vector3() : this(0, 0, 0) { }
 		public Vector3(float x, float y, float z)
 		{
 			X = x;
 			Y = y;
 			Z = z;
 		}
-		public Vector3() : this(0, 0, 0) { }
+
+		private bool calculated;
+		private void CalculateMagnitudeAndUnitVector()
+		{
+			if (calculated)
+				return;
+			magnitude = (float)Math.Sqrt((y * y + x * x + z * z));
+			unitVector = new Vector3(x / magnitude, y / magnitude, z / magnitude);
+			calculated = true;
+		}
 
 		public static float Dot(Vector3 a, Vector3 b)
 		{
@@ -32,13 +62,13 @@ namespace RayCastingEngine
 			return cp;
 		}
 
-		public override string ToString()
-		{
-			return $"Vector3({X}, {Y}, {Z})";
-		}
 
 		public static Vector3 FromArray(float[] coords)
 		{
+			if(coords.Length > 3)
+				throw new Exception("Vector3 can take only 3 floats");
+			else if (coords.Length < 3)
+				throw new Exception("Vector3 should take 3 floats");
 			return new Vector3(coords[0], coords[1], coords[2]);
 		}
 
@@ -89,6 +119,12 @@ namespace RayCastingEngine
 		}
 
 		#endregion
+
+		public override string ToString()
+		{
+			return $"Vector3({X}, {Y}, {Z})";
+		}
+
 	}
 }
 

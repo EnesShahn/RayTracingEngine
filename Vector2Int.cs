@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RayCastingEngine
+namespace SimpleRayTracingEngine
 {
 	class Vector2Int
 	{
 		public int X { get; set; }
 		public int Y { get; set; }
+
+		public Vector2Int() : this(0, 0) { }
 		public Vector2Int(int x, int y)
 		{
 			X = x;
 			Y = y;
 		}
-		public Vector2Int() : this(0, 0) { }
 
 
 		#region Operator Overloading

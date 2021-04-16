@@ -6,13 +6,13 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "RayCastingEngine/1.0.0": {
+      "SimpleRayTracingEngine/1.0.0": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.1",
           "System.Drawing.Common": "5.0.2"
         },
         "runtime": {
-          "RayCastingEngine.dll": {}
+          "SimpleRayTracingEngine.dll": {}
         }
       },
       "Microsoft.NETCore.Platforms/5.0.0": {},
@@ -71,7 +71,7 @@
     }
   },
   "libraries": {
-    "RayCastingEngine/1.0.0": {
+    "SimpleRayTracingEngine/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

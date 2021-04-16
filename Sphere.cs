@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RayCastingEngine
+namespace SimpleRayTracingEngine
 {
 	class Sphere : Object3D
 	{
@@ -15,23 +15,27 @@ namespace RayCastingEngine
 			this.radius = radius;
 		}
 
-
 		public override void Intersect(Ray ray, Hit hit, float tmin)
 		{
-			Vector3 oc = ray.Origin - center;
-			float a = Vector3.Dot(ray.Direction, ray.Direction);
-			float b = 2.0f * Vector3.Dot(ray.Direction, oc);
-			float c = Vector3.Dot(oc, oc) - radius * radius;
-			float discriminant = b * b - 4 * a * c; // Used to identify if 1 intersection occured(tangent), no intersection or 2 intersection (from outside and inside)
-			if(discriminant > 0) //There is intersection
+			Vector3 L = center - ray.Origin;
+			if (L.Magnitude < radius) // Ray inside sphere
+				return;
+			float tca = Vector3.Dot(L, ray.Direction);
+			if(tca < 0) // Sphere behind the origin of the ray
+				return;
+			float d2 = Vector3.Dot(L, L) - tca * tca;
+			if (d2 > radius || d2 < 0)
+				return;
+
+			float thc = (float)Math.Sqrt(radius * radius - d2);
+			float t0 = tca - thc;
+			float t1 = tca + thc; // Second intersection
+
+			if(t0 > 0 && t0 > tmin && t0 < hit.TCurrent)
 			{
-				float t = (- b + (float)Math.Sqrt(discriminant)) / 2*a;
-				if (t > 0 && t > tmin && t > hit.TCurrent)
-				{
-					hit.TCurrent = t;
-					hit.Color = this.Color;
-					hit.Intersection = true;
-				}
+				hit.TCurrent = t0;
+				hit.Color = this.Color;
+				hit.Intersection = true;
 			}
 		}
 	}

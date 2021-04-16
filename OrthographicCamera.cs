@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RayCastingEngine
+namespace SimpleRayTracingEngine
 {
 	class OrthographicCamera : Camera
 	{
@@ -20,7 +20,7 @@ namespace RayCastingEngine
 			this.direction = direction;
 			this.up = up;
 			this.size = size;
-			right = Vector3.CrossProduct(direction, up);
+			right = Vector3.CrossProduct(up, direction);
 		}
 
 		public override Ray GenerateRay(Vector2 pixelPosition)

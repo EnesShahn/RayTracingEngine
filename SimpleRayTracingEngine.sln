@@ -3,12 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RayCastingEngine", "RayCastingEngine.csproj", "{9518FDCB-DA13-411E-9D8D-706391B2E730}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleRayTracingEngine", "SimpleRayTracingEngine.csproj", "{9518FDCB-DA13-411E-9D8D-706391B2E730}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CD1796ED-D9A4-4412-B185-3EC259DA4F09}"
-	ProjectSection(SolutionItems) = preProject
-		Vector3.cs = Vector3.cs
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

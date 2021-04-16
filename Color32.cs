@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RayCastingEngine
+namespace SimpleRayTracingEngine
 {
 	class Color32
 	{
@@ -26,17 +26,13 @@ namespace RayCastingEngine
 		public static Color32 FromArray(byte[] rgba)
 		{
 			if(rgba.Length > 4)
-			{
 				throw new Exception("Color field in json file has more than 4 values");
-			}
-			else if(rgba.Length == 4)
-			{
+			else if(rgba.Length < 3)
+				throw new Exception("Color field in json file needs at least 3 values");
+
+			if(rgba.Length == 4)
 				return new Color32(rgba[0], rgba[1], rgba[2], rgba[3]);
-			}
-			else
-			{
-				return new Color32(rgba[0], rgba[1], rgba[2]);
-			}
+			return new Color32(rgba[0], rgba[1], rgba[2]);
 		}
 
 		public static Color32 operator*(Color32 color, float b)

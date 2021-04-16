@@ -192,11 +192,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Enes\\source\\repos\\RayTracingEngine\\RayCastingEngine.csproj",
-      "projectName": "RayCastingEngine",
-      "projectPath": "C:\\Users\\Enes\\source\\repos\\RayTracingEngine\\RayCastingEngine.csproj",
+      "projectUniqueName": "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\SimpleRayTracingEngine.csproj",
+      "projectName": "SimpleRayTracingEngine",
+      "projectPath": "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\SimpleRayTracingEngine.csproj",
       "packagesPath": "C:\\Users\\Enes\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Enes\\source\\repos\\RayTracingEngine\\obj\\",
+      "outputPath": "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"

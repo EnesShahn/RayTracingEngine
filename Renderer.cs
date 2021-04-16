@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Text;
 using System.Drawing.Imaging;
 
-namespace RayCastingEngine
+namespace SimpleRayTracingEngine
 {
 	class Renderer
 	{
@@ -60,12 +60,12 @@ namespace RayCastingEngine
 					if (hit.Intersection)
 					{
 						float depth = (far - hit.TCurrent) / (far - near);
-						int depthRGB = (int)((-depth+1f) * 255);
+						int depthRGB = (int)((depth) * 255);
 						if (depthRGB < 0)
 							depthRGB = 0;
 						if (depthRGB > 255)
 							depthRGB = 255;
-						bmp.SetPixel(y, x, Color.FromArgb(depthRGB, depthRGB, depthRGB));
+						bmp.SetPixel(x, y, Color.FromArgb(depthRGB, depthRGB, depthRGB));
 					}
 				}
 			}
