@@ -18,3 +18,12 @@ D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\obj\Debug\netcoreapp3.1\SimpleRa
 D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\obj\Debug\netcoreapp3.1\SimpleRayTracingEngine.dll
 D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\obj\Debug\netcoreapp3.1\SimpleRayTracingEngine.pdb
 D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\obj\Debug\netcoreapp3.1\SimpleRayTracingEngine.genruntimeconfig.cache
+D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\bin\Debug\netcoreapp3.1\Resources\scene1.json
+D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\bin\Debug\netcoreapp3.1\Resources\scene1_diffuse.json
+D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\bin\Debug\netcoreapp3.1\Resources\scene2.json
+D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\bin\Debug\netcoreapp3.1\Resources\scene2_ambient.json
+D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\bin\Debug\netcoreapp3.1\Resources\scene3_perspective.json
+D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\bin\Debug\netcoreapp3.1\Resources\scene4_plane.json
+D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\bin\Debug\netcoreapp3.1\Resources\scene5_sphere_triangle.json
+D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\bin\Debug\netcoreapp3.1\Resources\scene6_squashed_sphere.json
+D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\bin\Debug\netcoreapp3.1\Resources\scene7_squashed_rotated_sphere.json

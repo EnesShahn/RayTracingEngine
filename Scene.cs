@@ -6,9 +6,12 @@ namespace SimpleRayTracingEngine
 {
 	class Scene
 	{
-		public Camera camera { get; set; }
-		public Group group { get; set; }
-		public Color32 Background { get; set; }
+		public Object3D root { get; set; }
+		public Color01 Background { get; set; }
+		public Color01 ambient { get; set; }
+
+		public Object3D MainLight { get; set; }
+		public Object3D MainCamera { get; set; }
 
 	}
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SimpleRayTracingEngine
 {
-	abstract class Camera
+	abstract class Camera : Component
 	{
 		public abstract Ray GenerateRay(Vector2 pixelPosition);
 	}

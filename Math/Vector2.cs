@@ -25,6 +25,13 @@ namespace SimpleRayTracingEngine
 			get { CalculateMagnitudeAndUnitVector(); return unitVector; }
 		}
 		
+		public static Vector2 Zero {
+			get { return new Vector2(0, 0); }
+		}
+		public static Vector2 One {
+			get { return new Vector2(1, 1); }
+		}
+
 		public Vector2() : this(0, 0) { }
 		public Vector2(float x, float y)
 		{
