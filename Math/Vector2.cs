@@ -4,108 +4,97 @@ using System.Text;
 
 namespace SimpleRayTracingEngine
 {
-	class Vector2
+	struct Vector2
 	{
-		private float magnitude;
-		private Vector2 unitVector;
-		private float x, y;
+		public float x, y;
+		public Vector2(float x, float y)
+		{
+			this.x = x;
+			this.y = y;
+		}
 
-		public float X {
-			get { return x; }
-			set { x = value; }
-		}
-		public float Y {
-			get { return y; }
-			set { y = value; }
-		}
+		#region Properties
 		public float Magnitude {
-			get { CalculateMagnitudeAndUnitVector(); return magnitude; }
+			get { return (float)Math.Sqrt(x * x + y * y); }
+		}
+		public float SqrMagnitude {
+			get { return x * x + y * y ; }
 		}
 		public Vector2 Normalized {
-			get { CalculateMagnitudeAndUnitVector(); return unitVector; }
+			get {
+				float magnitude = (float)Math.Sqrt(x * x + y * y);
+				return new Vector2(x / magnitude, y / magnitude);
+			}
 		}
-		
 		public static Vector2 Zero {
 			get { return new Vector2(0, 0); }
 		}
 		public static Vector2 One {
 			get { return new Vector2(1, 1); }
 		}
+		#endregion
 
-		public Vector2() : this(0, 0) { }
-		public Vector2(float x, float y)
+		#region Methods
+		public void Normalize()
 		{
-			X = x;
-			Y = y;
+			float magnitude = (float)Math.Sqrt(x * x + y * y);
+			this.x /= magnitude;
+			this.y /= magnitude;
 		}
-
-		private bool calculated;
-		private void CalculateMagnitudeAndUnitVector()
-		{
-			if (calculated)
-				return;
-			magnitude = (float)Math.Sqrt((y * y + x * x));
-			unitVector = new Vector2(x / magnitude, y / magnitude);
-			calculated = true;
-		}
-
-
-		public static Vector2 Normalize(Vector2 v)
-		{
-			float magnitude = (float)Math.Sqrt((v.y * v.y - v.x * v.x));
-			return new Vector2(v.x / magnitude, v.y / magnitude);
-		}
+		#endregion
 
 		#region Operator Overloading
 		public static Vector2 operator +(Vector2 a, Vector2 b)
 		{
-			return new Vector2(a.X + b.X, a.Y + b.Y);
+			return new Vector2(a.x + b.x, a.y + b.y);
 		}
 		public static Vector2 operator -(Vector2 a, Vector2 b)
 		{
-			return new Vector2(a.X - b.X, a.Y - b.Y);
+			return new Vector2(a.x - b.x, a.y - b.y);
 		}
 		public static Vector2 operator -(Vector2 a)
 		{
-			return new Vector2(-a.X, -a.Y);
+			return new Vector2(-a.x, -a.y);
 		}
 		public static Vector2 operator *(int c, Vector2 a)
 		{
-			return new Vector2(a.X * c, a.Y * c);
+			return new Vector2(a.x * c, a.y * c);
 		}
 		public static Vector2 operator /(int c, Vector2 a)
 		{
-			return new Vector2(a.X / c, a.Y / c);
+			return new Vector2(a.x / c, a.y / c);
 		}
 		public static Vector2 operator *(float c, Vector2 a)
 		{
-			return new Vector2(a.X * c, a.Y * c);
+			return new Vector2(a.x * c, a.y * c);
 		}
 		public static Vector2 operator /(float c, Vector2 a)
 		{
-			return new Vector2(a.X / c, a.Y / c);
+			return new Vector2(a.x / c, a.y / c);
 		}
 		public static Vector2 operator *(Vector2 a, int c)
 		{
-			return new Vector2(a.X * c, a.Y * c);
+			return new Vector2(a.x * c, a.y * c);
 		}
 		public static Vector2 operator /(Vector2 a, int c)
 		{
-			return new Vector2(a.X / c, a.Y / c);
+			return new Vector2(a.x / c, a.y / c);
 		}
 		public static Vector2 operator *(Vector2 a, float c)
 		{
-			return new Vector2(a.X * c, a.Y * c);
+			return new Vector2(a.x * c, a.y * c);
 		}
 		public static Vector2 operator /(Vector2 a, float c)
 		{
-			return new Vector2(a.X / c, a.Y / c);
+			return new Vector2(a.x / c, a.y / c);
 		}
 		#endregion
 
+		#region Overridden Methods
 		public override string ToString()
 		{
-			return $"Vector2({X}, {Y})";
+			return $"Vector2({x}, {y})";
 		}
+		#endregion
 	}
 }

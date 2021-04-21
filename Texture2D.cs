@@ -19,5 +19,10 @@ namespace SimpleRayTracingEngine
 			aspectRation = (float)width / height;
 			pixels = new Color01[width, height];
 		}
+
+		public Color01 this[int x, int y] {
+			get { return pixels[x, y]; }
+			set { pixels[x, y] = value; }
+		}
 	}
 }

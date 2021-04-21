@@ -11,7 +11,7 @@ namespace SimpleRayTracingEngine
 
 		public Plane(Vector3 normal, Color01 color) : base(color)
 		{
-
+			this.normal = normal;
 		}
 
 		public override void Intersect(Ray ray, Hit hit, float tmin)

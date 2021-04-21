@@ -12,15 +12,15 @@ namespace SimpleRayTracingEngine
 
 		public static void RenderToImage(string fileName, Scene scene)
 		{
-			Bitmap bmp = new Bitmap(resolution.X, resolution.Y);
+			Bitmap bmp = new Bitmap(resolution.x, resolution.y);
 
 			SetBGColor(bmp, scene.Background);
 
-			for (int y = 0; y <= resolution.Y; y++)
+			for (int y = 0; y <= resolution.y; y++)
 			{
-				for (int x = 0; x <= resolution.X; x++)
+				for (int x = 0; x <= resolution.x; x++)
 				{
-					Vector2 pos = new Vector2((float)x / resolution.X, (float)y / resolution.Y);
+					Vector2 pos = new Vector2((float)x / resolution.x, (float)y / resolution.y);
 					Ray ray = scene.MainCamera.GetComponent<Camera>().GenerateRay(pos);
 					Hit hit = new Hit();
 					for (int i = 0; i < scene.root.ChildCount(); i++)
@@ -41,15 +41,15 @@ namespace SimpleRayTracingEngine
 		}
 		public static void RenderDepthToImage(string fileName, Scene scene, float near, float far)
 		{
-			Bitmap bmp = new Bitmap(resolution.X, resolution.Y);
+			Bitmap bmp = new Bitmap(resolution.x, resolution.y);
 
 			SetBGColor(bmp, new Color01(0, 0, 0));
 
-			for (int y = 0; y <= resolution.Y; y++)
+			for (int y = 0; y <= resolution.y; y++)
 			{
-				for (int x = 0; x <= resolution.X; x++)
+				for (int x = 0; x <= resolution.x; x++)
 				{
-					Vector2 pos = new Vector2((float)x / resolution.X, (float)y / resolution.Y);
+					Vector2 pos = new Vector2((float)x / resolution.x, (float)y / resolution.y);
 					Ray ray = scene.MainCamera.GetComponent<Camera>().GenerateRay(pos);
 					Hit hit = new Hit();
 					for (int i = 0; i < scene.root.ChildCount(); i++)
@@ -75,9 +75,9 @@ namespace SimpleRayTracingEngine
 
 		public static void SetBGColor(Bitmap bmp, Color01 color)
 		{
-			for (int y = 0; y < resolution.Y; y++)
+			for (int y = 0; y < resolution.y; y++)
 			{
-				for (int x = 0; x < resolution.X; x++)
+				for (int x = 0; x < resolution.x; x++)
 				{
 					bmp.SetPixel(x, y, Color.FromArgb((int)(color.R * 255), (int)(color.G * 255), (int)(color.B * 255)));
 				}

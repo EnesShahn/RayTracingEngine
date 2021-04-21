@@ -7,7 +7,8 @@ namespace SimpleRayTracingEngine
 	sealed class Sphere : Mesh
 	{
 		private float radius;
-		private float radius2;
+		private float radius2; // Cache to improve speed
+
 		public Sphere(float radius, Color01 color) : base(color)
 		{
 			this.radius = radius;
@@ -17,7 +18,7 @@ namespace SimpleRayTracingEngine
 		public override void Intersect(Ray ray, Hit hit, float tmin)
 		{
 			Vector3 L = object3D.position - ray.Origin;
-			if (L.Magnitude < radius) // Ray inside sphere
+			if (L.SqrMagnitude < radius2) // Ray inside sphere (Square both sides to get rid of the Square root = Better Performance)
 				return;
 			float tca = Vector3.Dot(L, ray.Direction);
 			if (tca < 0) // Sphere behind the origin of the ray

@@ -22,8 +22,8 @@ namespace SimpleRayTracingEngine
 
 		public override Ray GenerateRay(Vector2 pixelPosition)
 		{
-			Vector3 horizontal = (pixelPosition.X - 0.5f) * size * right;
-			Vector3 vertical = (pixelPosition.Y - 0.5f) * size * up ;
+			Vector3 horizontal = (pixelPosition.x - 0.5f) * size * right;
+			Vector3 vertical = (pixelPosition.y - 0.5f) * size * up ;
 			Vector3 rayOrigin = object3D.position + horizontal + vertical;
 			return new Ray(rayOrigin, direction);
 		}
