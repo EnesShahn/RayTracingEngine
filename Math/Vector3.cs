@@ -67,7 +67,7 @@ namespace SimpleRayTracingEngine
 		public static float AngleBetween(Vector3 a, Vector3 b)
 		{
 			float dot = a.x * b.x + a.y * b.y + a.z * b.z;
-			return (float)(Math.Acos(dot / (a.Magnitude * b.Magnitude)) * (180f / Math.PI));
+			return (float)(Math.Acos(dot / (a.Magnitude * b.Magnitude)) * Mathf.DegreesToRad);
 		}
 
 		public static Vector3 FromArray(float[] coords)
