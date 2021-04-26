@@ -55,6 +55,21 @@ namespace SimpleRayTracingEngine
 			};
 			return cp;
 		}
+
+
+
+		/// <summary>
+		/// Calculates the angle between 2 vectors.
+		/// </summary>
+		/// <param name="a">Vector a</param>
+		/// <param name="b">Vector b</param>
+		/// <returns>The angle between vector a and b.</returns>
+		public static float AngleBetween(Vector3 a, Vector3 b)
+		{
+			float dot = a.x * b.x + a.y * b.y + a.z * b.z;
+			return (float)(Math.Acos(dot / (a.Magnitude * b.Magnitude)) * (180f / Math.PI));
+		}
+
 		public static Vector3 FromArray(float[] coords)
 		{
 			if(coords.Length > 3)
