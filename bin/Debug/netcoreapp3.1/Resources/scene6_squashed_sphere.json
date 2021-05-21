@@ -6,11 +6,11 @@
 		"size" : 2.5
 	},
 	"background" : {
-		"color" : [0.2, 0, 0.6],
+		"color" : [0, 0, 0],
 		"ambient" : [0, 0, 0]
 	},
 	"light" : {
-		"direction" : [-0.2, -0.2, -1],
+		"direction" : [0.2, -0.2, -1],
 		"color" : [1, 1, 1]
 	},
 	"group" : [

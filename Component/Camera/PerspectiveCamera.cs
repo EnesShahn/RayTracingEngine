@@ -4,32 +4,42 @@ using System.Text;
 
 namespace SimpleRayTracingEngine
 {
-	class PerspectiveCamera : Camera
+	sealed class PerspectiveCamera : Camera
 	{
-		private Vector3 up;
-		private Vector3 direction;
-		private Vector3 right;
-		private float fov = 5;
+		private Vector3 horizontal = new Vector3(1, 0, 0);
+		private Vector3 vertical = new Vector3(0, 1, 0);
+		private Vector3 lowerLeftCorner = new Vector3(-2, -2, 1);
+		private float aspectRatio = 1f;
+		private float scale = 1.0f;
 
-		public PerspectiveCamera(Vector3 direction, Vector3 up, int fov)
+		public void Init(Vector3 direction, int fov)
 		{
-			this.direction = direction;
-			this.up = up;
-			this.fov = fov;
-			right = Vector3.CrossProduct(up, direction);
+			Vector3 tmpUp = new Vector3(0, 1, 0);
+			Vector3 right = Vector3.CrossProduct(tmpUp, direction);
+			Vector3 up = Vector3.CrossProduct(direction, right);
+
+			float theta = fov * Mathf.DegreesToRad;
+
+			float h = MathF.Tan(theta / 2);
+			float viewport_height = scale * h;
+			float viewport_width = aspectRatio * viewport_height;
+
+			this.vertical = viewport_height * up * 2;
+			this.horizontal = viewport_width * right * 2;
+			this.lowerLeftCorner = direction - this.horizontal/2 - this.vertical/2;
 		}
 
-		public override Ray GenerateRay(Vector2 pixelPosition)
+		/// <summary>
+		/// Generate Ray that has position = Camera Position and a direction interpolated from the lower left corner to the top right corner of screen port
+		/// </summary>
+		/// <param name="screenCoord"> Goes form [0,0] (Lower Left Corner) to [1,1] (Top Right Corner)</param>
+		/// <returns></returns>
+		public override Ray GenerateRay(Vector2 screenCoord)
 		{
-			//TODO: 
-			//Vector3 horizontal = (pixelPosition.X - 0.5f) * size * right;
-			//Vector3 vertical = (pixelPosition.Y - 0.5f) * size * up;
-			//Vector3 rayOrigin = object3D.position + horizontal + vertical;
-			//return new Ray(rayOrigin, direction);
-			//Vector3 w_p = (-width / 2) * u + (height / 2) * v - ((height / 2) / tan(fov_rad * 0.5);
-			//Vector3 ray_dir = normalize(x * u + y * (-v) + w_p);
-
-			throw new NotImplementedException();
+			Vector3 rayDirection = lowerLeftCorner + screenCoord.x * horizontal + screenCoord.y * vertical;
+			//Console.WriteLine(rayDirection);
+			return new Ray(object3D.position, rayDirection.Normalized);
 		}
+
 	}
 }

@@ -8,80 +8,99 @@ namespace SimpleRayTracingEngine
 {
 	class Renderer
 	{
-		private static Vector2Int resolution = new Vector2Int(500, 500);
-
-		public static void RenderToImage(string fileName, Scene scene)
+		public static void RenderToImage(string outputFolder, string sceneName, Scene scene, float near, float far)
 		{
-			Bitmap bmp = new Bitmap(resolution.x, resolution.y);
-
+			Bitmap bmp = new Bitmap(Settings.IMAGE_RESOLUTION.x, Settings.IMAGE_RESOLUTION.y);
+			Bitmap bmpDepth = new Bitmap(Settings.IMAGE_RESOLUTION.x, Settings.IMAGE_RESOLUTION.y);
+			
 			SetBGColor(bmp, scene.Background);
+			SetBGColor(bmpDepth, new Color01(0, 0, 0));
 
-			for (int y = 0; y <= resolution.y; y++)
+			//Multipication faster than division so we cache it instead of dividing in the loop
+			double oneDivResX = 1f / Settings.IMAGE_RESOLUTION.x;
+			double oneDivResY = 1f / Settings.IMAGE_RESOLUTION.y;
+
+			Camera mainCamera = scene.MainCamera.GetComponent<Camera>();
+			Light light = scene.MainLight.GetComponent<Light>();
+
+			for (int y = 0; y < Settings.IMAGE_RESOLUTION.y; y++)
 			{
-				for (int x = 0; x <= resolution.x; x++)
+				for (int x = 0; x < Settings.IMAGE_RESOLUTION.x; x++)
 				{
-					Vector2 pos = new Vector2((float)x / resolution.x, (float)y / resolution.y);
-					Ray ray = scene.MainCamera.GetComponent<Camera>().GenerateRay(pos);
+					//screenCoord goes from 0,0 to 1,1 (Screen Coord) x, y = 0 : lower left corner, = 1 : top right corner.
+					Vector2 screenCoord = new Vector2((float)(x * oneDivResX), (float)(y * oneDivResY));
+					Ray ray = mainCamera.GenerateRay(screenCoord);
 					Hit hit = new Hit();
+					
 					for (int i = 0; i < scene.root.ChildCount(); i++)
 					{
 						if(scene.root.GetChild(i).HasComponent<Mesh>())
 							scene.root.GetChild(i).GetComponent<Mesh>().Intersect(ray, hit, 0f);
-					} 
+					}
+					
 					if (hit.Intersection)
 					{
-						Light light = scene.MainLight.GetComponent<Light>();
-						Color01 finalColor = (scene.ambient * hit.Color) + Math.Max(Vector3.Dot(light.Direction, hit.Normal), 0) * (hit.Color * light.Color);
-						bmp.SetPixel(y, x, Color.FromArgb((int)(finalColor.R* 255), (int)(finalColor.G * 255), (int)(finalColor.B * 255)));
-					}
-				}
-			}
+						float intensity = Vector3.Dot(-light.Direction, hit.Normal);
+						Color01 fColor = scene.ambient * hit.Color + Math.Max(intensity, 0) * (hit.Color * light.Color);
 
-			bmp.Save(fileName, ImageFormat.Png);
-		}
-		public static void RenderDepthToImage(string fileName, Scene scene, float near, float far)
-		{
-			Bitmap bmp = new Bitmap(resolution.x, resolution.y);
-
-			SetBGColor(bmp, new Color01(0, 0, 0));
-
-			for (int y = 0; y <= resolution.y; y++)
-			{
-				for (int x = 0; x <= resolution.x; x++)
-				{
-					Vector2 pos = new Vector2((float)x / resolution.x, (float)y / resolution.y);
-					Ray ray = scene.MainCamera.GetComponent<Camera>().GenerateRay(pos);
-					Hit hit = new Hit();
-					for (int i = 0; i < scene.root.ChildCount(); i++)
-					{
-						if (scene.root.GetChild(i).HasComponent<Mesh>())
-							scene.root.GetChild(i).GetComponent<Mesh>().Intersect(ray, hit, 0f);
-					}
-					if (hit.Intersection)
-					{
+						//Depth Texture
 						float depth = (far - hit.TCurrent) / (far - near);
-						int depthRGB = (int)((depth) * 255);
-						if (depthRGB < 0)
-							depthRGB = 0;
-						if (depthRGB > 255)
-							depthRGB = 255;
-						bmp.SetPixel(x, y, Color.FromArgb(depthRGB, depthRGB, depthRGB));
+						int depthRGB = Mathf.Clamp(0, 255, (int)((depth) * 255));
+
+						// Bitmap sets pixels from top left corner to lower right corner, thats why we need to invert the y or else image will be flipped on the x axis
+						bmp.SetPixel(x, Settings.IMAGE_RESOLUTION.y - y - 1, Color.FromArgb((int)(fColor.R * 255), (int)(fColor.G * 255), (int)(fColor.B * 255)));
+						bmpDepth.SetPixel(x, Settings.IMAGE_RESOLUTION.y - y - 1, Color.FromArgb(depthRGB, depthRGB, depthRGB));
 					}
 				}
 			}
 
-			bmp.Save(fileName, ImageFormat.Png);
+			bmp.Save($"{outputFolder}/{sceneName}.png", ImageFormat.Png);
+			bmpDepth.Save($"{outputFolder}/{sceneName}_depth.png", ImageFormat.Png);
 		}
-
 		public static void SetBGColor(Bitmap bmp, Color01 color)
 		{
-			for (int y = 0; y < resolution.y; y++)
+			for (int y = 0; y < Settings.IMAGE_RESOLUTION.y; y++)
 			{
-				for (int x = 0; x < resolution.x; x++)
+				for (int x = 0; x < Settings.IMAGE_RESOLUTION.x; x++)
 				{
 					bmp.SetPixel(x, y, Color.FromArgb((int)(color.R * 255), (int)(color.G * 255), (int)(color.B * 255)));
 				}
 			}
+		}
+
+		public static void DebugSampleScene(Vector2 screenCoord, Scene scene, float near, float far)
+		{
+			Console.WriteLine($"Sampling {screenCoord}");
+			Camera mainCamera = scene.MainCamera.GetComponent<Camera>();
+			Light light = scene.MainLight.GetComponent<Light>();
+			Ray ray = mainCamera.GenerateRay(screenCoord);
+			Hit hit = new Hit();
+
+			for (int i = 0; i < scene.root.ChildCount(); i++)
+			{
+				if (scene.root.GetChild(i).HasComponent<Mesh>())
+					scene.root.GetChild(i).GetComponent<Mesh>().Intersect(ray, hit, 0f);
+			}
+
+			if (hit.Intersection)
+			{
+				Console.WriteLine("Intersection");
+				float intensity = Vector3.Dot(-light.Direction, hit.Normal);
+				Color01 fColor = scene.ambient * hit.Color + Math.Max(intensity, 0) * (hit.Color * light.Color);
+
+				//Depth Texture
+				float depth = (far - hit.TCurrent) / (far - near);
+				int depthRGB = Mathf.Clamp(0, 255, (int)((depth) * 255));
+
+				Console.WriteLine($"INTENSITY {intensity}, NORMAL {hit.Normal}, LIGHT_DIRECTION {light.Direction}");
+				Console.WriteLine($"COLOR LIB {Color.FromArgb((int)(fColor.R * 255), (int)(fColor.G * 255), (int)(fColor.B * 255))}, DEPTH {depth}");
+				Console.WriteLine($"COLOR {fColor}, DEPTH {depth}");
+			}
+			else
+			{
+				Console.WriteLine("NO Intersection");
+			}
+			Console.WriteLine();
 		}
 
 	}

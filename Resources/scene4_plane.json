@@ -10,7 +10,7 @@
 		"ambient" : [0.1, 0.1, 0.1]
 	},
 	"light" : {
-		"direction" : [-0.5, -0.5, -1],
+		"direction" : [0.5, -0.5, -1],
 		"color" : [0.9, 0.9, 0.9]
 	},
 	"group" : [
@@ -23,28 +23,28 @@
 		},
 		{ 
 			"sphere" : {
-				"center" : [1, 1, 1],
+				"center" : [-1, 1, 1],
 				"radius" : 0.75,
 				"color" : [0, 1, 0]
 			}
 		},
 		{ 
 			"sphere" : {
-				"center" : [-1, -1, 1],
+				"center" : [1, -1, 1],
 				"radius" : 0.75,
 				"color" : [0, 1, 0]
 			}
 		},
 		{ 
 			"sphere" : {
-				"center" : [-1, 1, -1],
+				"center" : [1, 1, -1],
 				"radius" : 0.75,
 				"color" : [0, 0, 1]
 			}
 		},
 		{ 
 			"sphere" : {
-				"center" : [1, -1, -1],
+				"center" : [-1, -1, -1],
 				"radius" : 0.75,
 				"color" : [0, 0, 1]
 			}

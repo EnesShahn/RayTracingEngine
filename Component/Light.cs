@@ -6,7 +6,7 @@ namespace SimpleRayTracingEngine
 {
 	class Light : Component
 	{
-		private Vector3 direction;
+		private Vector3 direction = new Vector3(0, 0, 1);
 		private Color01 color;
 
 		public Vector3 Direction {
@@ -15,7 +15,7 @@ namespace SimpleRayTracingEngine
 		public Color01 Color {
 			get { return color; }
 		}
-		public Light(Vector3 direction, Color01 color)
+		public void Init(Vector3 direction, Color01 color)
 		{
 			this.direction = direction;
 			this.color = color;

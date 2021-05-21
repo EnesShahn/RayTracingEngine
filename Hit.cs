@@ -6,7 +6,7 @@ namespace SimpleRayTracingEngine
 {
 	class Hit
 	{
-		private float tCurrent = int.MaxValue;
+		private float tCurrent = float.MaxValue;
 		private Color01 color;
 		private bool intersection;
 		private Vector3 normal;

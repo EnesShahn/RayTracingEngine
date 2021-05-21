@@ -10,6 +10,9 @@ namespace SimpleRayTracingEngine
 		public Vector3 rotation = new Vector3(0, 0, 0); // TODO: Currently Using Euler Rotation, Convert to Quaternion
 		public Vector3 scale = new Vector3(1, 1, 1);
 
+		public Matrix4x4 objectToWorldMatrix = Matrix4x4.Identity;
+
+
 		private List<Component> components = new List<Component>();
 		private Object3D parent;
 		private List<Object3D> children = new List<Object3D>();
@@ -26,10 +29,12 @@ namespace SimpleRayTracingEngine
 		}
 
 
-		public void AddComponent(Component component)
+		public T AddComponent<T>() where T : Component, new()
 		{
-			component.object3D = this;
-			components.Add(component);
+			T newComp = new T();
+			newComp.SetOwner(this);
+			components.Add(newComp);
+			return newComp;
 		}
 		public void RemoveComponent(Component component) => components.Remove(component);
 		public bool HasComponent<T>() where T: Component

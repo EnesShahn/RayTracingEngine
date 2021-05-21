@@ -4,6 +4,8 @@ using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace SimpleRayTracingEngine
 {
@@ -15,25 +17,25 @@ namespace SimpleRayTracingEngine
 			Console.WriteLine("Rendering");
 
 			Scene scene1 = ReadSceneData("Resources/scene1_diffuse.json");
-			Renderer.RenderToImage("Output/scene1.png", scene1);
-			Renderer.RenderDepthToImage("Output/scene1_depth.png", scene1, 8, 11.5f);
+			Renderer.RenderToImage("Output", "scene1", scene1, 8, 11.5f);
 
 			Scene scene2 = ReadSceneData("Resources/scene2_ambient.json");
-			Renderer.RenderToImage("Output/scene2.png", scene2);
-			Renderer.RenderDepthToImage("Output/scene2_depth.png", scene2, 8, 11.5f);
+			Renderer.RenderToImage("Output", "scene2", scene2, 8, 11.5f);
 
-			//Scene scene3 = ReadSceneData("Resources/scene3_perspective.json");
-			//Renderer.RenderToImage("Output/scene3.png", scene3);
-			//Renderer.RenderDepthToImage("Output/scene3_depth.png", scene3, 8, 11.5f);
+			Scene scene3 = ReadSceneData("Resources/scene3_perspective.json");
+			Renderer.RenderToImage("Output", "scene3", scene3, 8, 11.5f);
 
-			//Scene scene4 = ReadSceneData("Resources/scene4_plane.json");
-			//Renderer.RenderToImage("Output/scene4.png", scene4);
-			//Renderer.RenderDepthToImage("Output/scene4_depth.png", scene4, 8, 11.5f);
+			Scene scene4 = ReadSceneData("Resources/scene4_plane.json");
+			Renderer.RenderToImage("Output", "scene4", scene4, 8, 11.5f);
 
-			//Scene scene5 = ReadSceneData("Resources/scene44_sphere_triangle.json");
-			//Renderer.RenderToImage("Output/scene4.png", scene5);
-			//Renderer.RenderDepthToImage("Output/scene4_depth.png", scene5, 8, 11.5f);
+			Scene scene5 = ReadSceneData("Resources/scene5_sphere_triangle.json");
+			Renderer.RenderToImage("Output", "scene5", scene5, 8, 11.5f);
 
+			Scene scene6 = ReadSceneData("Resources/scene6_squashed_sphere.json");
+			Renderer.RenderToImage("Output", "scene6", scene6, 8, 11.5f);
+
+			Scene scene7 = ReadSceneData("Resources/scene7_squashed_rotated_sphere.json");
+			Renderer.RenderToImage("Output", "scene7", scene7, 8, 11.5f);
 
 			Console.WriteLine("Finished Rendering!");
 			return 0;
@@ -46,6 +48,7 @@ namespace SimpleRayTracingEngine
 			{
 				json = r.ReadToEnd();
 			}
+			Console.WriteLine($"Parsing Scene File: {sceneFileJson}");
 
 			Scene scene = new Scene();
 
@@ -66,37 +69,68 @@ namespace SimpleRayTracingEngine
 				Vector3 position = Vector3.Zero;
 				Vector3 rotation = Vector3.Zero;
 				Vector3 scale = Vector3.Zero;
+				Matrix4x4 transformationMatrix = Matrix4x4.Identity;
 
-				if (item["sphere"] != null)
+				#region Transformation Matrix
+				JToken object3D_json = item;
+				if(item["transform"] != null)
 				{
-					position = ParseVector3(item["sphere"]["center"]);
-					float radius = (float)item["sphere"]["radius"];
-					Color01 col = ParseColor32(item["sphere"]["color"]);
-					Sphere sphereMesh = new Sphere(radius, col);
-					newObject3D.AddComponent(sphereMesh);
+					foreach (var transformationType in item["transform"]["transformations"])
+					{
+						if (transformationType["translate"] != null)
+						{
+							transformationMatrix *= Matrix4x4.CreateTranslation(ParseVector3(transformationType["translate"]));
+						}
+						else if (transformationType["scale"] != null)
+						{
+							transformationMatrix *= Matrix4x4.CreateScale(ParseVector3(transformationType["scale"]));
+						}
+						else if (transformationType["xrotate"] != null)
+						{
+							transformationMatrix *= Matrix4x4.CreateRotationX((float)transformationType["xrotate"]);
+						}
+						else if (transformationType["yrotate"] != null)
+						{
+							transformationMatrix *= Matrix4x4.CreateRotationY((float)transformationType["yrotate"]);
+						}
+						else if (transformationType["zrotate"] != null)
+						{
+							transformationMatrix *= Matrix4x4.CreateRotationZ((float)transformationType["zrotate"]);
+						}
+					}
+				
+					object3D_json = item["transform"]["object"];
+				}
+				#endregion
+
+				if (object3D_json["sphere"] != null)
+				{
+					position = ParseVector3(object3D_json["sphere"]["center"]);
+					float radius = (float)object3D_json["sphere"]["radius"];
+					Color01 col = ParseColor32(object3D_json["sphere"]["color"]);
+					Sphere sphereMesh = newObject3D.AddComponent<Sphere>();
+					sphereMesh.Init(radius, col);
 					Console.Write($"Created Sphere \nPosition: {position}\nRotation: {rotation}\nScale: {scale}\nRadius: {radius}\nColor: {col}\n\n");
 				}
-				else if (item["plane"] != null)
+				else if (object3D_json["plane"] != null)
 				{
-					Console.Write("Plane");
-					float offset = (float)item["plane"]["offset"];
-					position = new Vector3(0, 0, offset);
-					Vector3 normal = ParseVector3(item["plane"]["normal"]);
-					Color01 col = ParseColor32(item["plane"]["color"]);
-					Plane planeMesh = new Plane(normal, col);
-					newObject3D.AddComponent(planeMesh);
+					float offset = (float)object3D_json["plane"]["offset"];
+					position = new Vector3(0, offset, 0);
+					Vector3 normal = ParseVector3(object3D_json["plane"]["normal"]);
+					Color01 col = ParseColor32(object3D_json["plane"]["color"]);
+					Plane planeMesh = newObject3D.AddComponent<Plane>();
+					planeMesh.Init(normal, col);
 					Console.Write($"Created Plane \nPosition: {position}\nRotation: {rotation}\nScale: {scale}\nNormal: {normal}\nColor: {col}\n\n");
 
 				}
-				else if (item["triangle"] != null)
+				else if (object3D_json["triangle"] != null)
 				{
-					Console.Write("Triangle");
-					Vector3 v1 = ParseVector3(item["triangle"]["v1"]);
-					Vector3 v2 = ParseVector3(item["triangle"]["v2"]);
-					Vector3 v3 = ParseVector3(item["triangle"]["v3"]);
-					Color01 col = ParseColor32(item["triangle"]["color"]);
-					Triangle triangleMesh = new Triangle(v1, v2, v3, col);
-					newObject3D.AddComponent(triangleMesh);
+					Vector3 v1 = ParseVector3(object3D_json["triangle"]["v1"]);
+					Vector3 v2 = ParseVector3(object3D_json["triangle"]["v2"]);
+					Vector3 v3 = ParseVector3(object3D_json["triangle"]["v3"]);
+					Color01 col = ParseColor32(object3D_json["triangle"]["color"]);
+					Triangle triangleMesh = newObject3D.AddComponent<Triangle>();
+					triangleMesh.Init(v1, v2, v3, col);
 					Console.Write($"Created Triangle \nPosition: {position}\nRotation: {rotation}\nScale: {scale}\nV1: {v1}\nV2: {v2}\nV3: {v3}\nColor: {col}\n\n");
 
 				}
@@ -104,6 +138,7 @@ namespace SimpleRayTracingEngine
 				newObject3D.position = position;
 				newObject3D.rotation = rotation;
 				newObject3D.scale = scale;
+				newObject3D.objectToWorldMatrix = transformationMatrix;
 				root.AddChild(newObject3D);
 			}
 			#endregion
@@ -119,8 +154,8 @@ namespace SimpleRayTracingEngine
 				int size = (int)cameraO["size"];
 
 				Object3D cameraObject3D = new Object3D() { position = camPos };
-				Camera camera = new OrthographicCamera(camDirection, camUpDirection, size);
-				cameraObject3D.AddComponent(camera);
+				OrthographicCamera camera = cameraObject3D.AddComponent<OrthographicCamera>();
+				camera.Init(camDirection, size);
 
 				root.AddChild(cameraObject3D);
 				scene.MainCamera = cameraObject3D;
@@ -132,16 +167,16 @@ namespace SimpleRayTracingEngine
 
 				Vector3 camPos = ParseVector3(cameraO["center"]);
 				Vector3 camDirection = ParseVector3(cameraO["direction"]);
-				Vector3 camUpDirection = ParseVector3(cameraO["up"]);
 				int fov = (int)cameraO["angle"];
 
 				Object3D cameraObject3D = new Object3D() { position = camPos };
-				Camera camera = new PerspectiveCamera(camDirection, camUpDirection, fov);
-				cameraObject3D.AddComponent(camera);
+
+				PerspectiveCamera camera = cameraObject3D.AddComponent<PerspectiveCamera>();
+				camera.Init(camDirection, fov);
 
 				root.AddChild(cameraObject3D);
 				scene.MainCamera = cameraObject3D;
-				Console.Write($"Created Perspective Camera \nPosition: {camPos}\nRotation: {Vector3.Zero}\nScale: {Vector3.One}\nDirection: {camDirection}\nUp: {camUpDirection}\nFOV: {fov}\n\n");
+				Console.Write($"Created Perspective Camera \nPosition: {camPos}\nRotation: {Vector3.Zero}\nScale: {Vector3.One}\nDirection: {camDirection}\nFOV: {fov}\n\n");
 
 			}
 
@@ -151,11 +186,11 @@ namespace SimpleRayTracingEngine
 			//If light data exists then load it and add it to the scene.
 			if (jsonDecoded["light"] != null)
 			{
-				Vector3 direction = ParseVector3(jsonDecoded["light"]["direction"]);
+				Vector3 direction = ParseVector3(jsonDecoded["light"]["direction"]).Normalized;
 				Color01 color = ParseColor32(jsonDecoded["light"]["color"]);
 				Object3D lightObject = new Object3D();
-				Light light = new Light(direction, color);
-				lightObject.AddComponent(light);
+				Light light = lightObject.AddComponent<Light>();
+				light.Init(direction, color);
 				root.AddChild(lightObject);
 				scene.MainLight = lightObject;
 				Console.Write($"Created Light \nPosition: {Vector3.Zero}\nRotation: {Vector3.Zero}\nScale: {Vector3.One}\nDirection: {direction}\nColor: {color}\n\n");

@@ -6,29 +6,28 @@ namespace SimpleRayTracingEngine
 {
 	sealed class Plane : Mesh
 	{
-
 		private Vector3 normal;
 
-		public Plane(Vector3 normal, Color01 color) : base(color)
+		public void Init(Vector3 normal, Color01 color)
 		{
 			this.normal = normal;
+			this.color = color;
 		}
 
 		public override void Intersect(Ray ray, Hit hit, float tmin)
 		{
-			float denom = Vector3.Dot(ray.Direction, normal);
-			float t = tmin;
-			if(denom > 1e-6)
-			{
-				Vector3 p = ray.Origin - object3D.position;
-				t = Vector3.Dot(p, normal);
-			}
+			float denom = Vector3.Dot(normal, ray.Direction);
+			if (denom >= -1e-6) // That means either the ray is parallel to the plane's surface or looking from behing it, so we ignore it 
+				return;
+			
+			float t = -Vector3.Dot(normal, ray.Origin - object3D.position ) / denom;
 
-			if(t >= 0 && t > tmin && t < hit.TCurrent)
+			if (t >= 0 && t > tmin && t < hit.TCurrent)
 			{
 				hit.TCurrent = t;
 				hit.Color = color;
 				hit.Intersection = true;
+				hit.Normal = normal;
 			}
 		}
 	}
