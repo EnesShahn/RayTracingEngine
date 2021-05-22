@@ -11,10 +11,10 @@ namespace SimpleRayTracingEngine
 {
 	class Program
 	{
-		
 		static int Main(string[] args)
 		{
-			Console.WriteLine("Rendering");
+			if (!Directory.Exists("Output"))
+				Directory.CreateDirectory("Output");
 
 			Scene scene1 = ReadSceneData("Resources/scene1_diffuse.json");
 			Renderer.RenderToImage("Output", "scene1", scene1, 8, 11.5f);
@@ -37,7 +37,6 @@ namespace SimpleRayTracingEngine
 			Scene scene7 = ReadSceneData("Resources/scene7_squashed_rotated_sphere.json");
 			Renderer.RenderToImage("Output", "scene7", scene7, 8, 11.5f);
 
-			Console.WriteLine("Finished Rendering!");
 			return 0;
 		}
 
@@ -155,7 +154,7 @@ namespace SimpleRayTracingEngine
 
 				Object3D cameraObject3D = new Object3D() { position = camPos };
 				OrthographicCamera camera = cameraObject3D.AddComponent<OrthographicCamera>();
-				camera.Init(camDirection, size);
+				camera.Init(camDirection, camUpDirection, size);
 
 				root.AddChild(cameraObject3D);
 				scene.MainCamera = cameraObject3D;
@@ -167,12 +166,14 @@ namespace SimpleRayTracingEngine
 
 				Vector3 camPos = ParseVector3(cameraO["center"]);
 				Vector3 camDirection = ParseVector3(cameraO["direction"]);
+				Vector3 camUpDirection = ParseVector3(cameraO["up"]);
+
 				int fov = (int)cameraO["angle"];
 
 				Object3D cameraObject3D = new Object3D() { position = camPos };
 
 				PerspectiveCamera camera = cameraObject3D.AddComponent<PerspectiveCamera>();
-				camera.Init(camDirection, fov);
+				camera.Init(camDirection, camUpDirection, fov);
 
 				root.AddChild(cameraObject3D);
 				scene.MainCamera = cameraObject3D;

@@ -9,15 +9,15 @@ namespace SimpleRayTracingEngine
 		private Vector3 direction = new Vector3(0, 0, 1);
 		private Vector3 horizontal = new Vector3(1, 0, 0);
 		private Vector3 vertical = new Vector3(0, 1, 0);
-		private float size = 5;
-
-		public void Init(Vector3 direction, int size)
+		private Vector3 lowerLeftCorner;
+		public void Init(Vector3 direction, Vector3 up, int size)
 		{
 			this.direction = direction;
-			Vector3 tmpUp = new Vector3(0, 1, 0);
-			this.horizontal = Vector3.CrossProduct(tmpUp, direction);
-			this.vertical = Vector3.CrossProduct(direction, horizontal);
-			this.size = size;
+			//Just for error preventation as no much performance cost we normalize:
+			Vector3 right = Vector3.CrossProduct(direction, up).Normalized;
+			vertical = up * size;
+			horizontal = right * size * Settings.aspectRatio;
+			lowerLeftCorner = object3D.position - horizontal / 2f - vertical / 2f;
 		}
 
 		/// <summary>
@@ -27,9 +27,7 @@ namespace SimpleRayTracingEngine
 		/// <returns></returns>
 		public override Ray GenerateRay(Vector2 screenCoord) //TODO: Use Lower Left Corner and Interpolate
 		{
-			Vector3 horizontalLerped = (screenCoord.x - 0.5f) * size * horizontal;
-			Vector3 verticalLerped = (screenCoord.y - 0.5f) * size * vertical;
-			Vector3 rayOrigin = object3D.position + horizontalLerped + verticalLerped;
+			Vector3 rayOrigin = lowerLeftCorner + (horizontal * screenCoord.x) + (vertical * screenCoord.y);
 			return new Ray(rayOrigin, direction);
 		}
 

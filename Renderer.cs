@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using System.Drawing.Imaging;
+using System.Diagnostics;
 
 namespace SimpleRayTracingEngine
 {
@@ -10,6 +11,9 @@ namespace SimpleRayTracingEngine
 	{
 		public static void RenderToImage(string outputFolder, string sceneName, Scene scene, float near, float far)
 		{
+			Console.WriteLine($"Rendering \"{sceneName}\" ...");
+			Stopwatch wt = new Stopwatch();
+			wt.Start();
 			Bitmap bmp = new Bitmap(Settings.IMAGE_RESOLUTION.x, Settings.IMAGE_RESOLUTION.y);
 			Bitmap bmpDepth = new Bitmap(Settings.IMAGE_RESOLUTION.x, Settings.IMAGE_RESOLUTION.y);
 			
@@ -29,6 +33,7 @@ namespace SimpleRayTracingEngine
 				{
 					//screenCoord goes from 0,0 to 1,1 (Screen Coord) x, y = 0 : lower left corner, = 1 : top right corner.
 					Vector2 screenCoord = new Vector2((float)(x * oneDivResX), (float)(y * oneDivResY));
+					//Console.WriteLine(screenCoord);
 					Ray ray = mainCamera.GenerateRay(screenCoord);
 					Hit hit = new Hit();
 					
@@ -56,6 +61,9 @@ namespace SimpleRayTracingEngine
 
 			bmp.Save($"{outputFolder}/{sceneName}.png", ImageFormat.Png);
 			bmpDepth.Save($"{outputFolder}/{sceneName}_depth.png", ImageFormat.Png);
+
+			wt.Stop();
+			Console.WriteLine($"Finished Rendering \"{sceneName}\", it took {wt.ElapsedMilliseconds / 1000f} seconds.");
 		}
 		public static void SetBGColor(Bitmap bmp, Color01 color)
 		{
