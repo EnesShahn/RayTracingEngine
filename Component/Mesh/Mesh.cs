@@ -2,7 +2,7 @@
 {
 	abstract class Mesh : Component
 	{
-		protected Color01 color = new Color01(1, 1, 1, 1);
+		protected Material material = new PhongMaterial();
 
 		public abstract void Intersect(Ray ray, Hit hit, float tmin);
 	}

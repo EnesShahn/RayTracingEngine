@@ -6,16 +6,17 @@ namespace SimpleRayTracingEngine
 {
 	class Object3D
 	{
+		public int id;
+
 		public Vector3 position = new Vector3(0, 0, 0);
 		public Vector3 rotation = new Vector3(0, 0, 0); // TODO: Currently Using Euler Rotation, Convert to Quaternion
 		public Vector3 scale = new Vector3(1, 1, 1);
 
-		public Matrix4x4 objectToWorldMatrix = Matrix4x4.Identity;
+		public Matrix4x4 modelMatrix = Matrix4x4.Identity;
 
-
-		private List<Component> components = new List<Component>();
 		private Object3D parent;
-		private List<Object3D> children = new List<Object3D>();
+		private readonly List<Component> components = new List<Component>();
+		private readonly List<Object3D> children = new List<Object3D>();
 
 		public Object3D()
 		{

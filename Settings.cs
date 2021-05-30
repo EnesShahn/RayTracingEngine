@@ -6,8 +6,9 @@ namespace SimpleRayTracingEngine
 {
 	static class Settings
 	{
-		public static Vector2Int IMAGE_RESOLUTION = new Vector2Int(1280, 720);
+		public static Vector2Int IMAGE_RESOLUTION = new Vector2Int(500, 500);
 		public static float aspectRatio;
+		public static int MAX_BOUNCE = 3;
 
 		static Settings()
 		{

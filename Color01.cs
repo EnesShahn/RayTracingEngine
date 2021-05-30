@@ -24,6 +24,25 @@ namespace SimpleRayTracingEngine
 		}
 		public Color01(float r, float g, float b) : this(r, g, b, 1f) { }
 
+		#region Primitive Colors
+		public static Color01 Black {
+			get { return new Color01(0, 0, 0, 1); }
+		}
+		public static Color01 White {
+			get { return new Color01(1, 1, 1, 1); }
+		}
+		public static Color01 Red {
+			get { return new Color01(1, 0, 0, 1); }
+		}
+		public static Color01 Green {
+			get { return new Color01(0, 1, 0, 1); }
+		}
+		public static Color01 Blue {
+			get { return new Color01(0, 0, 1, 1); }
+		}
+		#endregion
+		
+		
 		public void Normalize()
 		{
 			R = Math.Clamp(R, 0f, 1f);
@@ -61,8 +80,17 @@ namespace SimpleRayTracingEngine
 		{
 			return new Color01(color1.R + color2.R, color1.G + color2.G, color1.B + color2.B, color1.A + color2.A);
 		}
-		#endregion
 		
+		public static bool operator ==(Color01 color1, Color01 color2)
+		{
+			return (color1.R == color2.R && color1.G == color2.G && color1.B == color2.B && color1.A == color2.A);
+		}
+		public static bool operator !=(Color01 color1, Color01 color2)
+		{
+			return (color1.R != color2.R || color1.G != color2.G || color1.B != color2.B || color1.A != color2.A);
+		}
+		#endregion
+
 		public override string ToString()
 		{
 			return $"RGBA({R}, {G}, {B}, {A})";

@@ -13,8 +13,10 @@ namespace SimpleRayTracingEngine
 		public void Init(Vector3 direction, Vector3 up, int size)
 		{
 			this.direction = direction;
-			//Just for error preventation as no much performance cost we normalize:
+
 			Vector3 right = Vector3.CrossProduct(direction, up).Normalized;
+			up = Vector3.CrossProduct(right, direction).Normalized;
+
 			vertical = up * size;
 			horizontal = right * size * Settings.aspectRatio;
 			lowerLeftCorner = object3D.position - horizontal / 2f - vertical / 2f;

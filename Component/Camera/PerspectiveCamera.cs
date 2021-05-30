@@ -13,7 +13,8 @@ namespace SimpleRayTracingEngine
 
 		public void Init(Vector3 direction, Vector3 up, int fov)
 		{
-			Vector3 right = Vector3.CrossProduct(direction, up);
+			Vector3 right = Vector3.CrossProduct(direction, up).Normalized;
+			up = Vector3.CrossProduct(right, direction).Normalized;
 
 			float theta = fov * Mathf.DegreesToRad;
 

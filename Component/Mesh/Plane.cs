@@ -8,10 +8,10 @@ namespace SimpleRayTracingEngine
 	{
 		private Vector3 normal;
 
-		public void Init(Vector3 normal, Color01 color)
+		public void Init(Vector3 normal, Material material)
 		{
 			this.normal = normal;
-			this.color = color;
+			this.material = material;
 		}
 
 		public override void Intersect(Ray ray, Hit hit, float tmin)
@@ -24,10 +24,12 @@ namespace SimpleRayTracingEngine
 
 			if (t >= 0 && t > tmin && t < hit.TCurrent)
 			{
-				hit.TCurrent = t;
-				hit.Color = color;
 				hit.Intersection = true;
+				hit.Material = material;
+				hit.TCurrent = t;
 				hit.Normal = normal;
+				hit.Point = ray.Origin + ray.Direction * t;
+				hit.ID = object3D.id;
 			}
 		}
 	}

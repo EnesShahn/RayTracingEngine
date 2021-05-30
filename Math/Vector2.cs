@@ -41,6 +41,15 @@ namespace SimpleRayTracingEngine
 			this.x /= magnitude;
 			this.y /= magnitude;
 		}
+		public static float Dot(Vector2 a, Vector2 b)
+		{
+			return a.x * b.x + a.y * b.y;
+		}
+
+		public static Vector2 Reflect(Vector2 incoming, Vector2 normal)
+		{
+			return incoming - 2 * (Vector2.Dot(incoming, normal) * normal);
+		}
 		#endregion
 
 		#region Operator Overloading

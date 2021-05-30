@@ -1,0 +1,55 @@
+{
+	"perspectivecamera" : {
+		"center" : [0, 0, 5],
+		"direction" : [0, 0, -1],
+		"up" : [0, 1, 0],
+		"angle" : 45
+	},
+	"background" : {
+		"color" : [0, 0, 0],
+		"ambient" : [0.1, 0.1, 0.1]
+	},
+	"group" : [
+		{ 
+			"sphere" : {
+				"center" : [0, 0.1, 0],
+				"radius" : 0.9,
+				"material" : 0
+			}
+		},
+		{
+			"plane" : {
+				"normal" : [0.0, 1, 0.0],
+				"offset" : -1,
+				"material" : 0
+			}
+		}
+	],
+	"lights" : [
+		{
+			"directionalLight" : {
+				"direction" : [0.5, -1, 0],
+				"color" : [0.9, 0.0, 0.0]
+			}
+		},
+		{
+			"directionalLight" : {
+				"direction" : [-0.5, -1, 0],
+				"color" : [0.0, 0.0, 0.9]
+			}
+		},
+		{
+			"directionalLight" : {
+				"direction" : [0, -1, 0.5],
+				"color" : [0.0, 0.9, 0]
+			}
+		}
+	],
+	"materials" : [
+		{
+			"phongMaterial" : {
+				"diffuseColor" : [1, 1, 1]
+			}
+		}
+	]
+}

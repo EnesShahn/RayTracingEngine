@@ -9,14 +9,10 @@ namespace SimpleRayTracingEngine
 	{
 		private float[,] m = new float[4, 4];
 
-
 		public float this[int i, int j] {
 			private set { m[i, j] = value; }
 			get { return m[i, j]; }
 		}
-
-
-
 
 		public static Matrix4x4 Identity {
 			get {
@@ -54,21 +50,6 @@ namespace SimpleRayTracingEngine
 					result[i, j] = lhs[i, j] - rhs[i, j];
 			return result;
 		}
-		public static Vector3 operator *(Matrix4x4 lhs, Vector3 v)
-		{
-			Vector4 vw = new Vector4(v.x, v.y, v.z, 1f);
-			Vector4 result;
-			result.x = lhs[0, 0] * vw.x + lhs[0, 1] * vw.y + lhs[0, 2] * vw.z + lhs[0, 3] * vw.w;
-			result.y = lhs[1, 0] * vw.x + lhs[1, 1] * vw.y + lhs[1, 2] * vw.z + lhs[1, 3] * vw.w;
-			result.z = lhs[2, 0] * vw.x + lhs[2, 1] * vw.y + lhs[2, 2] * vw.z + lhs[2, 3] * vw.w;
-			result.w = lhs[3, 0] * vw.x + lhs[3, 1] * vw.y + lhs[3, 2] * vw.z + lhs[3, 3] * vw.w;
-			float w = result.w;
-			if (w != 1f)
-				result = new Vector4(result.x / w, result.y / w, result.z / w, 1f);
-			return new Vector3(result.x, result.y, result.z);
-		}
-
-		
 		#endregion
 
 		#region Creating Matrix
@@ -131,14 +112,13 @@ namespace SimpleRayTracingEngine
 			result[1, 1] = 1;
 			result[2, 2] = 1;
 			result[3, 3] = 1;
-			result[3, 0] = translation.x;
-			result[3, 1] = translation.y;
-			result[3, 2] = translation.z;
+			result[0, 3] = translation.x;
+			result[1, 3] = translation.y;
+			result[2, 3] = translation.z;
 			return result;
 		}
 
 		#endregion
-
 
 		private Matrix4x4 transpose;
 		public Matrix4x4 GetTranspose()

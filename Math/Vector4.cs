@@ -14,7 +14,13 @@ namespace SimpleRayTracingEngine
 			this.z = z;
 			this.w = w;
 		}
-
+		public Vector4(Vector3 v, float w)
+		{
+			x = v.x;
+			y = v.y;
+			z = v.z;
+			this.w = w;
+		}
 		#region Properties
 		public static Vector4 Zero {
 			get { return new Vector4(0, 0, 0, 0); }

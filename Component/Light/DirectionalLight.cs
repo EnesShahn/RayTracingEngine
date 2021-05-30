@@ -4,17 +4,21 @@ using System.Text;
 
 namespace SimpleRayTracingEngine
 {
-	class Light : Component
+	class DirectionalLight : Light
 	{
 		private Vector3 direction = new Vector3(0, 0, 1);
-		private Color01 color;
+		private float intensity = 1f;
 
-		public Vector3 Direction {
-			get { return direction; }
+		public override Vector3 GetDirection()
+		{
+			return direction;
 		}
-		public Color01 Color {
-			get { return color; }
+
+		public override float GetIntensity()
+		{
+			return intensity;
 		}
+
 		public void Init(Vector3 direction, Color01 color)
 		{
 			this.direction = direction;

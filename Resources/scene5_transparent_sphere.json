@@ -1,0 +1,131 @@
+{
+	"perspectivecamera" : {
+		"center" : [0, 7, 10],
+		"direction" : [0, -0.5, -1],
+		"up" : [0, 1, 0],
+		"angle" : 20
+	},
+	"background" : {
+		"color" : [0.2, 0.1, 0.5],
+		"ambient" : [0.1, 0.1, 0.1]
+	},
+	"group" : [
+		{
+			"plane" : {
+				"normal" : [0.0, 1, 0.0],
+				"offset" : -1,
+				"material" : 0
+			}
+		},
+		{
+			"transform" : {
+				"transformations" : [
+					{
+						"translate" : [1, 0.8, -3]
+					},
+					{
+						"scale" : [0.3, 1.8, 0.3]
+					}
+				],
+				"object" : {
+					"sphere" : {
+						"center" : [0, 0, 0],
+						"radius" : 1,
+						"material" : 1
+					}
+				}
+			}
+		},
+		{ 
+			"transform" : {
+				"transformations" : [
+					{
+						"translate" : [0, 0.8, -3]
+					},
+					{
+						"scale" : [0.3, 1.8, 0.3]
+					}
+				],
+				"object" : {
+					"sphere" : {
+						"center" : [0, 0, 0],
+						"radius" : 1,
+						"material" : 2
+					}
+				}
+			}
+		},
+		{ 
+			"transform" : {
+				"transformations" : [
+					{
+						"translate" : [-1, 0.8, -3]
+					},
+					{
+						"scale" : [0.3, 1.8, 0.3]
+					}
+				],
+				"object" : {
+					"sphere" : {
+						"center" : [0, 0, 0],
+						"radius" : 1,
+						"material" : 3
+					}
+				}
+			}
+		},
+		{
+			"sphere" : {
+				"center" : [0, 2, 0],
+				"radius" : 1.3,
+				"material" : 4
+			}
+		}
+	],
+	"lights" : [
+		{
+			"directionalLight" : {
+				"direction" : [-0.3, -1, -0.5],
+				"color" : [0.7, 0.7, 0.7]
+			}
+		},
+		{
+			"directionalLight" : {
+				"direction" : [0.3, -1, -0.5],
+				"color" : [0.2, 0.2, 0.2]
+			}
+		}
+	],
+	"materials" : [
+		{
+			"phongMaterial" : {
+				"diffuseColor" : [1, 1, 1]
+			}
+		},
+		{
+			"phongMaterial" : {
+				"diffuseColor" : [1, 0, 0]
+			}
+		},
+		{
+			"phongMaterial" : {
+				"diffuseColor" : [0, 1, 0]
+			}
+		},
+		{
+			"phongMaterial" : {
+				"diffuseColor" : [0, 0, 1]
+			}
+		},
+		{
+			"phongMaterial" : {
+				"diffuseColor" : [0.1, 0.1, 0.1],
+				"specularColor" : [1, 1, 1],
+				"exponent" : 100,
+				"transparentColor" : [0.7, 0.7, 0.7],
+				"reflectiveColor" : [0.3, 0.3, 0.3],
+				"indexOfRefraction" : 1.05
+			}
+		}
+	]
+}
