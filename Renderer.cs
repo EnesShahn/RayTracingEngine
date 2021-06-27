@@ -39,30 +39,6 @@ namespace SimpleRayTracingEngine
 			}
 		}
 
-		private static Vector3 GetRefractDirection(Vector3 incoming, Vector3 normal, float inIOR, float outIOR)
-		{
-			float cosi = Vector3.Dot(normal, incoming);
-			float etai = 1f, etat = outIOR;
-			Vector3 n = normal;
-			if (cosi < 0)
-			{
-				cosi = -cosi;
-			}
-			else
-			{
-				float temp = etai;
-				etai = etat;
-				etat = temp;
-				n = -normal;
-			}
-			float eta = etai / etat;
-			float k = 1f - (eta * eta) * (1f - (cosi * cosi));
-			if (k <= 0)
-				return Vector3.Zero;
-			else
-				return ((incoming + cosi * n) * eta  - n * MathF.Sqrt(k)).Normalized;
-		}
-
 		public static Color01 TraceRay(Ray ray, Hit hit, float weight, int depth)
 		{
 			float prevIOR = hit.Material != null ? hit.Material.indexOfRefraction : 1f;
@@ -101,7 +77,7 @@ namespace SimpleRayTracingEngine
 			#endregion
 
 			#region Refractive Ray
-			Vector3 refractDir = GetRefractDirection(ray.Direction, hit.Normal, prevIOR, hit.Material.indexOfRefraction);
+			Vector3 refractDir = Vector3.Refract(ray.Direction, hit.Normal, prevIOR, hit.Material.indexOfRefraction);
 			Hit refractedHit = new Hit();
 			refractedHit.Material = hit.Material;
 			Ray refractedRay = new Ray(hit.Point, refractDir);

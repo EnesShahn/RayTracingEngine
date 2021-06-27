@@ -56,9 +56,6 @@
     <None Update="Resources\scene4_reflective_sphere.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\scene5_transparent_sphere - Copy.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Resources\scene5_transparent_sphere.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

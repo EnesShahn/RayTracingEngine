@@ -1,4 +1,3 @@
-D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\obj\Debug\netcoreapp3.1\SimpleRayTracingEngine.csprojAssemblyReference.cache
 D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\obj\Debug\netcoreapp3.1\SimpleRayTracingEngine.AssemblyInfoInputs.cache
 D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\obj\Debug\netcoreapp3.1\SimpleRayTracingEngine.AssemblyInfo.cs
 D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\obj\Debug\netcoreapp3.1\SimpleRayTracingEngine.csproj.CoreCompileInputs.cache
@@ -33,4 +32,4 @@ D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\bin\Debug\netcoreapp3.1\Resource
 D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\bin\Debug\netcoreapp3.1\Resources\scene4_reflective_sphere.json
 D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\bin\Debug\netcoreapp3.1\Resources\scene5_transparent_sphere.json
 D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\bin\Debug\netcoreapp3.1\Resources\scene6_transparent_sphere2.json
-D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\bin\Debug\netcoreapp3.1\Resources\scene5_transparent_sphere - Copy.json
+D:\Maker\EnesSahin\Projects\C#\RayTracingEngine\obj\Debug\netcoreapp3.1\SimpleRayTracingEngine.csproj.AssemblyReference.cache

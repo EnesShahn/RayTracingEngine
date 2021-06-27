@@ -80,6 +80,31 @@ namespace SimpleRayTracingEngine
 			return incoming - 2 * (Vector3.Dot(incoming, normal) * normal);
 		}
 
+		public static Vector3 Refract(Vector3 incoming, Vector3 normal, float inIOR, float outIOR)
+		{
+			float cosi = Vector3.Dot(normal, incoming);
+			float etai = 1f, etat = outIOR;
+			Vector3 n = normal;
+			if (cosi < 0)
+			{
+				cosi = -cosi;
+			}
+			else
+			{
+				float temp = etai;
+				etai = etat;
+				etat = temp;
+				n = -normal;
+			}
+			float eta = etai / etat;
+			float k = 1f - (eta * eta) * (1f - (cosi * cosi));
+			if (k <= 0)
+				return Vector3.Zero;
+			else
+				return ((incoming + cosi * n) * eta - n * MathF.Sqrt(k)).Normalized;
+		}
+
+
 		//w = 1
 		public static Vector3 TransformPoint(Vector3 point, Matrix4x4 matrix)
 		{
