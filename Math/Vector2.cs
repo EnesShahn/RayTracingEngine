@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleRayTracingEngine
+namespace EnesShahn
 {
-	struct Vector2
+	namespace RayTracingEngine
+	{
+		struct Vector2
 	{
 		public float x, y;
 		public Vector2(float x, float y)
@@ -106,4 +108,5 @@ namespace SimpleRayTracingEngine
 		}
 		#endregion
 	}
+}
 }

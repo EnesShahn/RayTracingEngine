@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleRayTracingEngine
+namespace RayTracingEngine
 {
 	abstract class Light : Component
 	{

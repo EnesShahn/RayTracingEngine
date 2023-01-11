@@ -1,9 +1,12 @@
-﻿namespace SimpleRayTracingEngine
+﻿namespace EnesShahn
 {
-	abstract class Mesh : Component
-	{
-		protected Material material = new PhongMaterial();
+    namespace RayTracingEngine
+    {
+        abstract class Mesh : Component
+        {
+            protected Material material = new PhongMaterial();
 
-		public abstract void Intersect(Ray ray, Hit hit, float tmin);
-	}
+            public abstract void Intersect(Ray ray, Hit hit, float tmin);
+        }
+    }
 }

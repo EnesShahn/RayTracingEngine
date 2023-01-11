@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleRayTracingEngine
+namespace EnesShahn
 {
-	abstract class Camera : Component
-	{
-		public abstract Ray GenerateRay(Vector2 pixelPosition);
-	}
+    namespace RayTracingEngine
+    {
+        abstract class Camera : Component
+        {
+            public abstract Ray GenerateRay(Vector2 pixelPosition);
+        }
+    }
 }

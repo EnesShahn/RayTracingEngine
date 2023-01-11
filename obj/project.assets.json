@@ -187,19 +187,19 @@
   },
   "packageFolders": {
     "C:\\Users\\Enes\\.nuget\\packages\\": {},
-    "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\SimpleRayTracingEngine.csproj",
-      "projectName": "SimpleRayTracingEngine",
-      "projectPath": "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\SimpleRayTracingEngine.csproj",
+      "projectUniqueName": "C:\\Users\\Enes\\Maker\\EnesSahin\\Projects\\GitHub\\RayTracingEngine\\RayTracingEngine.csproj",
+      "projectName": "RayTracingEngine",
+      "projectPath": "C:\\Users\\Enes\\Maker\\EnesSahin\\Projects\\GitHub\\RayTracingEngine\\RayTracingEngine.csproj",
       "packagesPath": "C:\\Users\\Enes\\.nuget\\packages\\",
-      "outputPath": "D:\\Maker\\EnesSahin\\Projects\\C#\\RayTracingEngine\\obj\\",
+      "outputPath": "C:\\Users\\Enes\\Maker\\EnesSahin\\Projects\\GitHub\\RayTracingEngine\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
         "C:\\Users\\Enes\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -250,7 +250,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[3.1.16, 3.1.16]"
+            "version": "[3.1.27, 3.1.27]"
           }
         ],
         "frameworkReferences": {
@@ -258,7 +258,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\6.0.100-preview.6.21355.2\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

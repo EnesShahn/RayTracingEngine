@@ -2,27 +2,30 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleRayTracingEngine
+namespace EnesShahn
 {
-	class DirectionalLight : Light
-	{
-		private Vector3 direction = new Vector3(0, 0, 1);
-		private float intensity = 1f;
+    namespace RayTracingEngine
+    {
+        class DirectionalLight : Light
+        {
+            private Vector3 direction = new Vector3(0, 0, 1);
+            private float intensity = 1f;
 
-		public override Vector3 GetDirection()
-		{
-			return direction;
-		}
+            public override Vector3 GetDirection()
+            {
+                return direction;
+            }
 
-		public override float GetIntensity()
-		{
-			return intensity;
-		}
+            public override float GetIntensity()
+            {
+                return intensity;
+            }
 
-		public void Init(Vector3 direction, Color01 color)
-		{
-			this.direction = direction;
-			this.color = color;
-		}
-	}
+            public void Init(Vector3 direction, Color01 color)
+            {
+                this.direction = direction;
+                this.color = color;
+            }
+        }
+    }
 }
