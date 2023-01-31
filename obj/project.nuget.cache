@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "chLzeZJjdDHOcqwOkr0+8mqzYCVtzqj5+fj555FP8aQKQXjePlxdS4VxFCdr5z7mEaGz2dA5xia1/K4A58SFSw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Enes\\Maker\\EnesSahin\\Projects\\GitHub\\RayTracingEngine\\RayTracingEngine.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Enes\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\Enes\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\Enes\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\Enes\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512",
+    "C:\\Users\\Enes\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.32\\microsoft.netcore.app.host.win-x64.3.1.32.nupkg.sha512"
+  ],
+  "logs": []
+}
