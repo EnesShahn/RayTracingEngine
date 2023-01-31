@@ -6,9 +6,9 @@ Since I've been using Unity 3D for a long time, I've decided to try and replicat
 Special thanks to Dr. Abdullah Bulbul for giving me this oppurtunity.
 I'm proud to say I was the only student to get A+ in this course in my class.
 
-# How To Run
+## How To Run
 ...
 
-# What's Next
+## What's Next
 - [ ] GPU accelerated rendering
 - [ ] Make an example game
